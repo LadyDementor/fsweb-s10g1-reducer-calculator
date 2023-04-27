@@ -4,7 +4,14 @@ import TotalDisplay from "./components/TotalDisplay";
 import CalcButton from "./components/CalcButton";
 
 import reducer, { initialState } from "./reducers";
-import { addOne, ADD_ONE, applyNumber } from "./actions";
+import {
+  addOne,
+  ADD_ONE,
+  applyNumber,
+  CHANGE_OPERATION,
+  APPLY_NUMBER,
+  MEMORY_PLUS,
+} from "./actions";
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -28,7 +35,10 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={"M+"} />
+              <CalcButton
+                onClick={() => dispatch({ type: MEMORY_PLUS })}
+                value={"M+"}
+              />
               <CalcButton value={"MR"} />
               <CalcButton value={"MC"} />
             </div>
@@ -76,9 +86,24 @@ function App() {
             </div>
 
             <div className="row">
-              <CalcButton value={"+"} />
-              <CalcButton value={"*"} />
-              <CalcButton value={"-"} />
+              <CalcButton
+                onClick={() =>
+                  dispatch({ type: CHANGE_OPERATION, payload: "+" })
+                }
+                value={"+"}
+              />
+              <CalcButton
+                onClick={() =>
+                  dispatch({ type: CHANGE_OPERATION, payload: "*" })
+                }
+                value={"*"}
+              />
+              <CalcButton
+                onClick={() =>
+                  dispatch({ type: CHANGE_OPERATION, payload: "-" })
+                }
+                value={"-"}
+              />
             </div>
 
             <div className="row ce_button">
